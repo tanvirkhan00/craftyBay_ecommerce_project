@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374463156240",
+    "project_id": "craftybay-ecommerce-project",
+    "storage_bucket": "craftybay-ecommerce-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374463156240:android:011146410a00f764303a95",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsUubZgbBJ3gZqQYYy36Pab7gUytsEEg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
