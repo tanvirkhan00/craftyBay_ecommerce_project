@@ -1,3 +1,6 @@
+import 'package:ecommerce_project/App/app_routes.dart';
+import 'package:ecommerce_project/App/app_theme.dart';
+import 'package:ecommerce_project/features/auth/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class CraftyBay extends StatefulWidget {
@@ -13,9 +16,11 @@ class _CraftyBayState extends State<CraftyBay> {
     return MaterialApp(
       // router
       // theme
-      onGenerateRoute: (settings) {
-
-      },
+      initialRoute: SplashScreen.name,
+      onGenerateRoute: AppRoutes.routes,
+        theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: .light,
     );
   }
 }
