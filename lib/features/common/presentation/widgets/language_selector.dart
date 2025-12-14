@@ -1,5 +1,5 @@
+import 'package:ecommerce_project/App/extensions/localization_extension.dart';
 import 'package:ecommerce_project/App/provider/language_provider.dart';
-import 'package:ecommerce_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(AppLocalizations.of(context)!.changeLanguage),
+        Text(context.localizations.changeLanguage),
         DropdownMenu<String>(
           initialSelection: 'en',
           onSelected: (String? language) {
@@ -24,6 +24,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
           dropdownMenuEntries: [
             DropdownMenuEntry(value: 'en', label: 'English'),
             DropdownMenuEntry(value: 'bn', label: 'Bangla'),
+            DropdownMenuEntry(value: 'de', label: 'Dutch'),
           ],
         ),
       ],
