@@ -23,26 +23,31 @@ class _CraftyBayState extends State<CraftyBay> {
         ChangeNotifierProvider(
             create: (_) => LanguageProvider()..loadInitialLanguage()),
         ChangeNotifierProvider(
-            create: (_) => ThemeProvider()..loadInitialThemeMode())
+            create: (_) => ThemeProvider()..loadInitialThemeMode()
+        )
       ],
       child: Consumer<LanguageProvider>(
         builder: (context, languageProvider, child) {
-          return MaterialApp(
-            // router
-            // theme
-            initialRoute: SplashScreen.name,
-            onGenerateRoute: AppRoutes.routes,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: .light,
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [Locale("en"), Locale("bn"), Locale("de")],
-            locale: languageProvider.currentLocal,
+          return Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return MaterialApp(
+                // router
+                // theme
+                initialRoute: SplashScreen.name,
+                onGenerateRoute: AppRoutes.routes,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: themeProvider.currentThemeMode,
+                localizationsDelegates: [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: [Locale("en"), Locale("bn"), Locale("de")],
+                locale: languageProvider.currentLocal,
+              );
+            }
           );
         }
       ),

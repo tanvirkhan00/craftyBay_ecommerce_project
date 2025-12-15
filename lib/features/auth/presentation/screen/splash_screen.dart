@@ -1,6 +1,5 @@
-import 'package:ecommerce_project/App/extensions/localization_extension.dart';
-import 'package:ecommerce_project/features/common/presentation/widgets/language_selector.dart';
-import 'package:ecommerce_project/l10n/app_localizations.dart';
+
+import 'package:ecommerce_project/features/common/presentation/widgets/theme_selector.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,14 +15,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Center(
-
-        child: Row(
-          mainAxisAlignment: .spaceAround,
-          children: [
-            Text(context.localizations.hello),
-            LanguageSelector()
+        child: Column(
+          children: const [
+            SizedBox(height: 100,),
+            Text(
+              "Select Theme",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            ThemeSelector(),
           ],
         ),
       ),

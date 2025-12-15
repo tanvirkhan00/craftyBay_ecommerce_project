@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider extends ChangeNotifier {
   final String _themeKay = "themeMode";
 
-  ThemeMode _currentThemeMode = .system;
+  ThemeMode _currentThemeMode = .dark;
 
   ThemeMode get currentThemeMode => _currentThemeMode;
 
@@ -12,11 +12,11 @@ class ThemeProvider extends ChangeNotifier {
     ThemeMode mode = await _getThemeMode();
     _currentThemeMode = mode ;
 
-    ChangeNotifier();
+    notifyListeners();
   }
 
-  void changeLocal(ThemeMode mode) {
-    if(_themeKay == mode) return;
+  void changeTheme(ThemeMode mode) {
+    if(_currentThemeMode == mode) return;
 
     _currentThemeMode = mode;
     _saveLocal(mode.name);
@@ -42,7 +42,7 @@ class ThemeProvider extends ChangeNotifier {
       case "dark":
         return .dark;
       default:
-        return .system;
+        return .dark;
     }
   }
 }
