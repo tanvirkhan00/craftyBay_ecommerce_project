@@ -3,6 +3,8 @@ import 'package:ecommerce_project/features/auth/presentation/screen/sign_up_scre
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/app_logo.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(),
-            SvgPicture.asset(AssetPaths.logoSvg),
+            appLogo(),
             Spacer(),
             CircularProgressIndicator(),
             SizedBox(height: 25,)
@@ -43,3 +45,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
