@@ -1,6 +1,7 @@
-
-import 'package:ecommerce_project/features/common/presentation/widgets/theme_selector.dart';
+import 'package:ecommerce_project/App/asset_paths.dart';
+import 'package:ecommerce_project/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,19 +13,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    _moveNextScreen();
+  }
+
+  Future<void> _moveNextScreen()async {
+    await Future.delayed(Duration(seconds:2));
+    Navigator.pushReplacementNamed(context, SignUpScreen.name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
-          children: const [
-            SizedBox(height: 100,),
-            Text(
-              "Select Theme",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            ThemeSelector(),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            SvgPicture.asset(AssetPaths.logoSvg),
+            Spacer(),
+            CircularProgressIndicator(),
+            SizedBox(height: 25,)
           ],
         ),
       ),
