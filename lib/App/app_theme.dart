@@ -51,7 +51,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)
           ),
           backgroundColor: AppColors.themeColor,
-          textStyle: TextStyle(fontWeight: .w700)
+          textStyle: TextStyle(fontWeight: .w700, color: Colors.white,)
       ),
     );
   }
