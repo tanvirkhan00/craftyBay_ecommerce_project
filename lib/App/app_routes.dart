@@ -1,3 +1,5 @@
+import 'package:ecommerce_project/features/auth/presentation/screen/otp_screen.dart';
+import 'package:ecommerce_project/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,10 @@ class AppRoutes {
       widget = SplashScreen();
     } else if (settings.name == SignUpScreen.name) {
       widget = SignUpScreen();
+    } else if (settings.name == SignInScreen.name) {
+      widget = SignInScreen();
+    } else if (settings.name == OtpScreen.name) {
+      widget = OtpScreen();
     }
 
 
