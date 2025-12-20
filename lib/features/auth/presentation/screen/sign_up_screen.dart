@@ -1,4 +1,5 @@
 import 'package:ecommerce_project/App/app_colors.dart';
+import 'package:ecommerce_project/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/widgets/app_logo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +127,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _signUpButton() {}
-  void _signInButton() {}
+  void _signInButton() {
+    Navigator.pushNamed(context, SignInScreen.name);
+  }
 
 }

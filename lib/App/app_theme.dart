@@ -25,6 +25,9 @@ class AppTheme {
 
   static InputDecorationTheme _inputDecorationTheme() {
     return InputDecorationTheme(
+      hintStyle: TextStyle(
+        fontWeight: .w300
+      ),
         contentPadding: .symmetric(horizontal:12),
         border: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.themeColor)
@@ -48,7 +51,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)
           ),
           backgroundColor: AppColors.themeColor,
-          textStyle: TextStyle(fontWeight: .w700)
+          textStyle: TextStyle(fontWeight: .w700, color: Colors.white,)
       ),
     );
   }
