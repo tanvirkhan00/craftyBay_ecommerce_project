@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
 
-  static const name = "otp-screen";
+  static const String name = "otp-screen";
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();

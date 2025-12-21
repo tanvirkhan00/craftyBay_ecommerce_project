@@ -1,23 +1,32 @@
 import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
+import 'package:ecommerce_project/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainNavHolderScreen extends StatefulWidget {
   const MainNavHolderScreen({super.key});
 
-  static const name = "/mainNavHolderScreen";
+  static const String name = "/mainNavHolderScreen";
 
   @override
   State<MainNavHolderScreen> createState() => _MainNavHolderScreenState();
 }
 
 class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
+ final List<Widget> _screen = [
+   HomeScreen(),
+   HomeScreen(),
+   HomeScreen(),
+   HomeScreen(),
+ ];
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MainNavContainerProvider>(
       builder: (context, mainNavContainerProvider,_) {
         return Scaffold(
+          body: _screen[mainNavContainerProvider.selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
             unselectedItemColor: Colors.grey,
               selectedItemColor: AppColors.themeColor,
