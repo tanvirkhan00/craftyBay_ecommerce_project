@@ -53,6 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
+  // ** Pin code package import kore oo kora jay // **
   Widget _otpBox (int index) {
    return SizedBox(
      width: 50,

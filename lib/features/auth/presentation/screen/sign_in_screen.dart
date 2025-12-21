@@ -56,6 +56,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     }
                   },
                 ),
+                Row(
+                  mainAxisAlignment: .end,
+                  children: [
+                    TextButton(onPressed: _onTapForgetButton, child: Text("Forgot Password") )
+                  ],
+                ),
                 FilledButton(onPressed: _signInButton, child: Text("Sign Ip")),
                 RichText(text: TextSpan(
                     text: "Haven't any account? ",
@@ -78,6 +84,8 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+  void _onTapForgetButton() {}
 
   void _signInButton() {
     Navigator.pushNamed(context, OtpScreen.name);

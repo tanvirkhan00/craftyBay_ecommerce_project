@@ -3,6 +3,7 @@ import 'package:ecommerce_project/App/app_theme.dart';
 import 'package:ecommerce_project/App/provider/language_provider.dart';
 import 'package:ecommerce_project/App/provider/theme_provider.dart';
 import 'package:ecommerce_project/features/auth/presentation/screen/splash_screen.dart';
+import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,7 +25,8 @@ class _CraftyBayState extends State<CraftyBay> {
             create: (_) => LanguageProvider()..loadInitialLanguage()),
         ChangeNotifierProvider(
             create: (_) => ThemeProvider()..loadInitialThemeMode()
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => MainNavContainerProvider())
       ],
       child: Consumer<LanguageProvider>(
         builder: (context, languageProvider, child) {
