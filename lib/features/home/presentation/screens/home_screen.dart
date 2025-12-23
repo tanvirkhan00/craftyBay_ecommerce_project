@@ -1,10 +1,13 @@
+import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/App/asset_paths.dart';
 import 'package:ecommerce_project/features/home/presentation/widgets/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../common/presentation/widgets/category_card.dart';
 import '../widgets/circle_icon_button.dart';
 import '../widgets/product_search_field.dart';
+import '../widgets/section_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,10 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              spacing: 16,
+              spacing: 8,
               children: [
+                const SizedBox(height: 4,),
                 product_search_field(),
-                homeCarouselSlider()
+                const SizedBox(height: 4,),
+                homeCarouselSlider(),
+                sectionHeader(title: 'Category', onTapSeeAll: () {  },),
+                _buildCategoryList()
               ],
             ),
           )
@@ -56,4 +63,27 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class _buildCategoryList extends StatelessWidget {
+  const _buildCategoryList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return CategoryCard();
+          },
+        separatorBuilder: (context, index) => SizedBox(width: 8,),
+          ),
+    );
+  }
+}
+
+
 
