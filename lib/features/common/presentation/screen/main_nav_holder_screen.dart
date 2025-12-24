@@ -1,4 +1,5 @@
 import 'package:ecommerce_project/App/app_colors.dart';
+import 'package:ecommerce_project/features/category/presentation/screens/category_list_screen.dart';
 import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MainNavHolderScreen extends StatefulWidget {
 class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
  final List<Widget> _screen = [
    HomeScreen(),
-   HomeScreen(),
+   CategoryListScreen(),
    HomeScreen(),
    HomeScreen(),
  ];

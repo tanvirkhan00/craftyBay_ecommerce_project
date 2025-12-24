@@ -1,8 +1,9 @@
-import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/App/asset_paths.dart';
+import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/features/home/presentation/widgets/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/presentation/widgets/category_card.dart';
 import '../widgets/circle_icon_button.dart';
@@ -31,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 product_search_field(),
                 const SizedBox(height: 4,),
                 homeCarouselSlider(),
-                sectionHeader(title: 'Category', onTapSeeAll: () {  },),
+                sectionHeader(title: 'Category', onTapSeeAll: () {
+                  context.read<MainNavContainerProvider>().changeToCategories();
+                },),
                 _buildCategoryList()
               ],
             ),
