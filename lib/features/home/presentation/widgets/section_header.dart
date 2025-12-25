@@ -13,8 +13,8 @@ class sectionHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TextTheme.of(context).titleMedium,),
-        TextButton(onPressed: onTapSeeAll , child: Text("See All"))
+        Text(title, style: TextTheme.of(context).titleMedium?.copyWith(fontWeight: .w600),),
+        TextButton(onPressed: onTapSeeAll , child: Text("See All")),
       ],
     );
   }
