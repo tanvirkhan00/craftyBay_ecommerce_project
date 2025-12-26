@@ -2,6 +2,7 @@ import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/features/category/presentation/screens/category_list_screen.dart';
 import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/features/home/presentation/screens/home_screen.dart';
+import 'package:ecommerce_project/features/product/wishList/presentation/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
    HomeScreen(),
    CategoryListScreen(),
    HomeScreen(),
-   HomeScreen(),
+   WishListScreen(),
  ];
 
   @override
