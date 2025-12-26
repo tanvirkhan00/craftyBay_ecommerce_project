@@ -1,8 +1,7 @@
-import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/App/asset_paths.dart';
-import 'package:ecommerce_project/App/constants.dart';
 import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/features/home/presentation/widgets/carousel_slider.dart';
+import 'package:ecommerce_project/features/product/presentation/screens/product_list_by_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -43,15 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               _buildCategoryList(),
               sectionHeader(title: 'Popular', onTapSeeAll: () {}),
-              SizedBox(
-                height: 175,
-                child: ListView.builder(
-                  scrollDirection: .horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                  return ProductCard();
-                }),
-              )
+              _buildPopularProductList(),
+              sectionHeader(title: 'Special', onTapSeeAll: () {}),
+              _buildPopularProductList(),
+              sectionHeader(title: 'New', onTapSeeAll: () {}),
+              _buildPopularProductList(),
 
 
             ],
@@ -59,6 +54,37 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildCategoryList() {
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, ProductListByCategory.name);
+      } ,
+      child: SizedBox(
+            height: 100,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return CategoryCard();
+              },
+              separatorBuilder: (context, index) => SizedBox(width: 8),
+            ),
+          ),
+    );
+  }
+
+  Widget _buildPopularProductList() {
+    return SizedBox(
+              height: 175,
+              child: ListView.builder(
+                scrollDirection: .horizontal,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                return ProductCard();
+              }),
+            );
   }
 
   AppBar _buildAppBar() {
@@ -77,21 +103,3 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 
-class _buildCategoryList extends StatelessWidget {
-  const _buildCategoryList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return CategoryCard();
-        },
-        separatorBuilder: (context, index) => SizedBox(width: 8),
-      ),
-    );
-  }
-}
