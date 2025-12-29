@@ -3,6 +3,7 @@ import 'package:ecommerce_project/features/auth/presentation/screen/sign_in_scre
 import 'package:ecommerce_project/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/screen/splash_screen.dart';
 import 'package:ecommerce_project/features/common/presentation/screen/main_nav_holder_screen.dart';
+import 'package:ecommerce_project/features/product/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce_project/features/product/presentation/screens/product_list_by_category.dart';
 import 'package:ecommerce_project/features/product/wishList/presentation/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class AppRoutes {
       widget = ProductListByCategory();
     }else if (settings.name == WishListScreen.name) {
       widget = WishListScreen();
+    }else if (settings.name == ProductDetailsScreen.name) {
+      widget = ProductDetailsScreen();
     }
 
 
