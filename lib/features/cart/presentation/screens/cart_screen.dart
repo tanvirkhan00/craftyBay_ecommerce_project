@@ -1,6 +1,8 @@
 import 'package:ecommerce_project/App/app_colors.dart';
 import 'package:ecommerce_project/App/constants.dart';
+import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
@@ -13,20 +15,26 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Cart")),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return CartItem();
-              },
+    return PopScope(
+      onPopInvokedWithResult: (_,__) {
+        context.read<MainNavContainerProvider>().backHome();
+      },
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(title: Text("Cart")),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return CartItem();
+                },
+              ),
             ),
-          ),
-          _buildTotalPriceAndCheckOutSection(),
-        ],
+            _buildTotalPriceAndCheckOutSection(),
+          ],
+        ),
       ),
     );
   }
