@@ -59,6 +59,58 @@ class ApiCaller {
     }
   }
 
+  Future<ApiResponse> postRequest({
+    required String url,
+    required Map<String, dynamic> body,
+  }) async {
+    try {
+      Uri uri = Uri.parse(url);
+
+      _logRequest(url, body: body);
+
+      Response response = await post(
+        uri,
+        headers: {'Content-Type': 'application/json', ...?headers},
+        body: jsonEncode(body),
+      );
+
+      _logResponse(url, response);
+
+      final int statusCode = response.statusCode;
+
+      if (statusCode == 200 || statusCode == 201) {
+        return ApiResponse(
+          isSuccess: true,
+          responseCode: statusCode,
+          responseData: jsonDecode(response.body),
+        );
+      } else if (statusCode == 401) {
+        onUnauthorize();
+        return ApiResponse(
+          isSuccess: false,
+          responseCode: statusCode,
+          errorMessage: "Un-Authorized",
+          responseData: null,
+        );
+      } else {
+        final decodedData = jsonDecode(response.body);
+        return ApiResponse(
+          isSuccess: false,
+          responseCode: statusCode,
+          responseData: decodedData,
+          errorMessage: decodedData['message'] ?? "Request failed",
+        );
+      }
+    } catch (e) {
+      return ApiResponse(
+        isSuccess: false,
+        responseCode: -1,
+        responseData: null,
+        errorMessage: e.toString(),
+      );
+    }
+  }
+
   void _logRequest(String url, {Map<String, dynamic>? body}) {
     _logger.i(
       "URL => $url\n"
