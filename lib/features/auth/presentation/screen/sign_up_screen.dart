@@ -4,6 +4,8 @@ import 'package:ecommerce_project/features/auth/presentation/provider/sign_up_pr
 import 'package:ecommerce_project/features/auth/presentation/screen/otp_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:ecommerce_project/features/auth/presentation/widgets/app_logo.dart';
+import 'package:ecommerce_project/features/common/presentation/widgets/center_circular_progress.dart';
+import 'package:ecommerce_project/features/common/presentation/widgets/snack_bar_message.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -140,9 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       builder: (context, signUpProvider, child) {
                         return Visibility(
                           visible: signUpProvider.isSignUpInProgress == false,
-                          replacement: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                          replacement: CenterCircularProgress(),
                           child: FilledButton(
                             onPressed: _signUpButton,
                             child: Text("Sign Up"),
@@ -194,11 +194,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
     if (isSuccess) {
-      Navigator.pushNamed(context, OtpScreen.name);
-    } else {
-      ScaffoldMessenger.of(
+      Navigator.pushNamed(
         context,
-      ).showSnackBar(SnackBar(content: Text(_signUpProvider.errorMessage!)));
+        OtpScreen.name,
+        arguments: _emailController.text,
+      );
+    } else {
+      showSnackBarMessage(context, _signUpProvider.errorMessage!);
     }
   }
 

@@ -19,7 +19,8 @@ class AppRoutes {
     } else if (settings.name == SignInScreen.name) {
       widget = SignInScreen();
     } else if (settings.name == OtpScreen.name) {
-      widget = OtpScreen();
+      final String email = settings.arguments as String;
+      widget = OtpScreen(email: email,);
     } else if (settings.name == MainNavHolderScreen.name) {
       widget = MainNavHolderScreen();
     }else if (settings.name == ProductListByCategory.name) {
