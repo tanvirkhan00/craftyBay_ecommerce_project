@@ -1,4 +1,4 @@
-import 'package:ecommerce_project/features/auth/presentation/screen/sign_up_screen.dart';
+import 'package:ecommerce_project/features/auth/presentation/provider/auth_controller.dart';
 import 'package:ecommerce_project/features/common/presentation/screen/main_nav_holder_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/app_logo.dart';
@@ -13,16 +13,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
     _moveNextScreen();
   }
 
-  Future<void> _moveNextScreen()async {
-    await Future.delayed(Duration(seconds:2));
-    Navigator.pushNamedAndRemoveUntil(context, SignUpScreen.name, (route)=> false);
+  Future<void> _moveNextScreen() async {
+    await Future.delayed(Duration(seconds: 2));
+    await AuthController.getUserData();
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      MainNavHolderScreen.name,
+      (route) => false,
+    );
   }
 
   @override
@@ -36,11 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
             appLogo(),
             Spacer(),
             CircularProgressIndicator(),
-            SizedBox(height: 25,)
+            SizedBox(height: 25),
           ],
         ),
       ),
     );
   }
 }
-
