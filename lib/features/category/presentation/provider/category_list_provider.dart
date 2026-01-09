@@ -24,12 +24,12 @@ class CategoryListProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   Future<bool> fetchCategoryList() async {
-    bool _isSuccess = false;
+    bool isSuccess = false;
 
     if (_currentPageNo == 0) {
       _categoryList.clear();
       _initialLoading = true;
-    } else if (_currentPageNo <= _lastPageNo!) {
+    } else if (_currentPageNo < _lastPageNo!) {
       _loadingMoreData = true;
     } else {
       return false;
@@ -42,7 +42,7 @@ class CategoryListProvider extends ChangeNotifier {
       url: Urls.categoryListUrl(_pageSize, _currentPageNo),
     );
     if (response.isSuccess) {
-      _lastPageNo = response.responseData['data']['last_page'];
+      _lastPageNo ??= response.responseData['data']['last_page'];
 
       List<CategoryModel> list = [];
       for (Map<String, dynamic> jsonData
@@ -50,18 +50,25 @@ class CategoryListProvider extends ChangeNotifier {
         list.add(CategoryModel.fromJson(jsonData));
       }
       _categoryList.addAll(list);
-      _isSuccess = true;
+      isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
     }
 
     if(_initialLoading) {
       _initialLoading = false;
-    } else if (_loadingMoreData) {
+    } else  {
       _loadingMoreData = false;
     }
+
     notifyListeners();
 
-    return _isSuccess;
+    return isSuccess;
+  }
+
+  Future<void> refreshCategoryList() async {
+    _currentPageNo = 0;
+    _lastPageNo = null;
+    await fetchCategoryList();
   }
 }

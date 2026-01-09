@@ -13,16 +13,21 @@ class CategoryListScreen extends StatefulWidget {
 }
 
 class _CategoryListScreenState extends State<CategoryListScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _fetchCategoryList();
+      context.read<CategoryListProvider>().fetchCategoryList();
+      _scrollController.addListener(_loadMoreData);
     });
   }
 
-  Future<void> _fetchCategoryList() async {
-    context.read<CategoryListProvider>().fetchCategoryList();
+  void _loadMoreData() {
+    if(_scrollController.position.extentBefore < 300) {
+      context.read<CategoryListProvider>().fetchCategoryList();
+    }
   }
 
   @override
@@ -48,17 +53,26 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               return CenterCircularProgress();
             }
 
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                itemCount: categoryListProvider.categoryList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
+            return Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      controller: _scrollController,
+                      itemCount: categoryListProvider.categoryList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                      ),
+                      itemBuilder: (context, index) {
+                        return CategoryCard(categoryModel: categoryListProvider.categoryList[index],);
+                      },
+                    ),
+                  ),
                 ),
-                itemBuilder: (context, index) {
-                  return CategoryCard(categoryModel: categoryListProvider.categoryList[index],);
-                },
-              ),
+                if(categoryListProvider.loadMoreData)
+                  CenterCircularProgress()
+              ],
             );
           },
         ),
