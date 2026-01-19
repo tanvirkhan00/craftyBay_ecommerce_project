@@ -1,4 +1,5 @@
 import 'package:ecommerce_project/App/asset_paths.dart';
+import 'package:ecommerce_project/features/category/presentation/provider/category_list_provider.dart';
 import 'package:ecommerce_project/features/common/presentation/provider/main_nav_container_provider.dart';
 import 'package:ecommerce_project/features/home/presentation/widgets/carousel_slider.dart';
 import 'package:ecommerce_project/features/product/presentation/screens/product_list_by_category.dart';
@@ -47,8 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildPopularProductList(),
               sectionHeader(title: 'New', onTapSeeAll: () {}),
               _buildPopularProductList(),
-
-
             ],
           ),
         ),
@@ -57,34 +56,37 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCategoryList() {
-    return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, ProductListByCategory.name);
-      } ,
-      child: SizedBox(
-            height: 100,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                // return CategoryCard();
-              },
-              separatorBuilder: (context, index) => SizedBox(width: 8),
-            ),
-          ),
+    return SizedBox(
+      height: 100,
+      child: Consumer<CategoryListProvider>(
+        builder: (context, categoryListProvider,_) {
+          if(categoryListProvider.initialLoading) {
+            return CircularProgressIndicator();
+          }
+          return ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: categoryListProvider.categoryList.length > 10 ? 10 : categoryListProvider.categoryList.length,
+            itemBuilder: (context, index) {
+              return CategoryCard(categoryModel: categoryListProvider.categoryList[index],);
+            },
+            separatorBuilder: (context, index) => SizedBox(width: 8),
+          );
+        }
+      ),
     );
   }
 
   Widget _buildPopularProductList() {
     return SizedBox(
-              height: 175,
-              child: ListView.builder(
-                scrollDirection: .horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                return ProductCard();
-              }),
-            );
+      height: 175,
+      child: ListView.builder(
+        scrollDirection: .horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return ProductCard();
+        },
+      ),
+    );
   }
 
   AppBar _buildAppBar() {
@@ -101,5 +103,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

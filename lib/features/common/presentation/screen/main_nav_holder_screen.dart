@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../cart/presentation/screens/cart_screen.dart';
+import '../../../category/presentation/provider/category_list_provider.dart';
 
 class MainNavHolderScreen extends StatefulWidget {
   const MainNavHolderScreen({super.key});
@@ -24,6 +25,12 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
    CartScreen(),
    WishListScreen(),
  ];
+
+ @override
+  void initState() {
+    super.initState();
+    context.read<CategoryListProvider>().fetchCategoryList();
+  }
 
   @override
   Widget build(BuildContext context) {
